@@ -7,7 +7,6 @@ namespace StoreLib
 
     string name;
     string address;
-    string[] orders;
     int phoneNumber;
     int id;
 

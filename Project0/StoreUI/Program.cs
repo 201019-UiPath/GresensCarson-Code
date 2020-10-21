@@ -2,11 +2,36 @@
 
 namespace StoreUI
 {
-    class Program
+  class Program
+  {
+
+
+    static void Employee()
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+      Console.WriteLine("Hello employee");
     }
+
+    static void Customer()
+    {
+      Console.WriteLine("Hello customer");
+
+    }
+
+
+    static void Main(string[] args)
+    {
+      Console.WriteLine("Hello Welcome to Store! Are you a customer or employee?");
+      string user = Console.ReadLine();
+
+      Boolean employee = false;
+      Boolean customer = false;
+      if (employee) { Employee(); }
+      else
+      {
+        if (!employee && customer) { Customer(); }
+        else { Console.WriteLine("Neither? Goodbye"); }
+      }
+
+    }
+  }
 }
