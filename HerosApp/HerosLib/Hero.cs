@@ -50,6 +50,9 @@ namespace HerosLib
     public int Id { get; set; }
     public string Name { get; set; }
 
+    public static Dictionary<string, string> hideOuts
+                                          = new Dictionary<string, string>();
+
     //1darray
     //public string[] superPowers = new string[10];
     #region Arrays
@@ -88,8 +91,8 @@ namespace HerosLib
      */
     #endregion
 
-
-    public Stack<string> superPowers = new Stack<string>();
+    #region Stack
+    /*public Stack<string> superPowers = new Stack<string>();
 
     public Hero()
     {
@@ -106,12 +109,33 @@ namespace HerosLib
 
     }
 
+    public void AddSuperPower(string superPower)
+    {
+      if (superPower != null && superPower != "")
+      {
+        superPowers.Push(superPower);
+      }
+    }
+
     public void RemoveSuperPower()
     {
       //as a stack this pops the removes the last power added
       superPowers.Pop();
-    }
+    }*/
+    #endregion
 
+
+    #region Dictionary
+
+    public Hero()
+    {
+
+      hideOuts.Add("Thor", "Asgaurd");
+      hideOuts.Add("Batman", "Batcave");
+
+
+    }
+    #endregion
 
   }
 
