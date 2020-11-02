@@ -28,8 +28,44 @@ namespace StoreUI.Menus
 
       // Next Step: 
 
+      Console.WriteLine($"Hello {c.Name}! Here are Today's Products: ");
+      Console.Write("Milk \nCheese \nIce Cream");
+
+      Console.WriteLine("Would you like to place an order? \n[0] Yes \n[1] No");
+      string proceed = Console.ReadLine();
+      while(!ValidInput(continue, "0|1")){
+        Console.WriteLine("Sorry, please enter 0 to proceed or 1 to quit");
+        proceed = Console.ReadLine();
+      }
+
+      if(ValidInput(proceed, "1")){return;}
+
+      Order newOrder = PlaceOrder();
+
     }
-    
+
+    public Order PlaceOrder(){
+      Console.WriteLine("Time to place an order!");
+      Order o = MakeOrder();
+    }
+
+    public Order MakeOrder(){
+      int numMilk = askForProduct("milk", "gallons");
+      int numCheese = askForProduct("cheese", "wheels");
+      int numIceCream = askForProduct("ice cream", "cartons");    
+    }
+
+    public int askForProduct(string name, string container){
+      int num;
+      Console.Write($"How many {container} of {name} would you like: ");
+      string numProd = Console.ReadLine();
+      while(ValidInput(numProd,"\\D")){
+        Console.WriteLine("Sorry, please enter a whole number!");
+        numProd = Console.ReadLine();
+      }
+      num = Convert.ToInt32(numProd);
+
+    }
     
     public Customer LogIn(){
       //ask user for customer details or quit

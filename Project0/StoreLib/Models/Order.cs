@@ -7,9 +7,12 @@ namespace StoreLib.Models
         private List<Product> items;
         private int id;
         private double price;
+        private string priceStr;
 
         public int Id{get;set;}
-        public double Price{get;}
+        public double Price{get;set;}
+        public string PriceStr{get;set;}
+        public List<Product> Items{get;set;}
 
         public Order(List<Product> pList){
             items = pList;
