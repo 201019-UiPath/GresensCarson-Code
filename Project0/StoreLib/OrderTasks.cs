@@ -5,32 +5,35 @@ namespace StoreLib
 {
     public class OrderTasks
     {
-        public List<Product> AddProduct(Order o, Product p){
+        public void AddProduct(Order o, Product p){
             //add product to items list
-            List<Product> lst = new List<Product>();
-            return lst;
+            o.AddProduct(p);
+            o.UpdatePrice();
         }
 
-        public List<Product> RemoveProduct(Order o, Product p){
+        public void RemoveProduct(Order o, Product p){
             //remove product from items list
-            List<Product> lst = new List<Product>();
-            return lst;
+            o.RemoveProduct(p);
+            o.UpdatePrice();
         }
 
         public void CancelOrder(Order o){
             //remove all products from product list
-            //foreach item in order, removeproduct
+            o.CancelOrder();
+        }
+
+        public void RecordOrderLoc(Order o, Location loc){
+            //record order made at this location
+        }
+
+        public void RecordOrderGlobal(Order o){
+            //record order made at this location
         }
 
         public double OrderPrice(Order o){
             //sum up all product prices in order list
-            return 0.0;
-        }
+            return o.OrderPrice();
 
-        public double OrderPrice(Order o, double discount){
-            //sum up the prices of all the products in order list
-            // then apply discount
-            return 0.0;
         }
     }
 }

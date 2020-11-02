@@ -9,14 +9,11 @@ namespace StoreLib.Models
         private double price;
 
         public int Id{get;set;}
-        
-        public double GetPrice(){
-            //sum up the prices of all the products in order list
-            return 0.0;
-        }
+        public double Price{get;}
 
         public Order(List<Product> pList){
             items = pList;
+            //check db for number of orders and create an id from that
         }
 
         public Order(List<Product> pList, int i){
@@ -24,6 +21,33 @@ namespace StoreLib.Models
             Id = i;
         }
 
+
+        public void AddProduct(Product p){
+            items.Add(p);
+        }
+
+        public void RemoveProduct(Product p){
+            items.Remove(p);
+        }
+
+        public void CancelOrder(){
+            items = null;
+            id = -1;
+            price = 0.0;
+        }
+
+        public void UpdatePrice(){
+            price = OrderPrice();
+        }
+
+        public double OrderPrice(){
+            //sum up all product prices in order list
+            double priceCounter = 0.0;
+            foreach(Product p in items){
+                priceCounter += p.Price;
+            }
+            return priceCounter;
+        }
 
     }
 }

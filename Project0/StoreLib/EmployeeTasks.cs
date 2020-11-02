@@ -5,9 +5,13 @@ namespace StoreLib
 {
     public class EmployeeTasks
     {
+        public void UpdateInventory(){
+            //get info from order db & update location db
+        }
 
         public List<Product> CheckInventory(){
             //check total inventory
+            UpdateInventory();
             List<Product> lst = new List<Product>();
             return lst;
         }
@@ -24,6 +28,7 @@ namespace StoreLib
 
         public void RestockProductGlobal(Product p){
             //restock product everywhere
+            p.Stock = p.MaxStock();
         }
 
         public void RestockLocation(Location loc){
