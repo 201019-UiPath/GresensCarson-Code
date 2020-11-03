@@ -50,7 +50,14 @@ namespace StoreLib
     public int CheckLocationStock(Product p, Location loc)
     {
       //check the remaining stock of product p at location loc
-      return 0;
+      List<Product> lst = loc.Inventory;
+      int i = lst.IndexOf(p);
+      if (i.Equals(-1)) { throw new OutOfStockException(); }
+      else
+      {
+        int stock = p.Stock;
+        return stock;
+      }
     }
 
   }

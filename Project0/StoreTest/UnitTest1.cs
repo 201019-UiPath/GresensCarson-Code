@@ -208,8 +208,5 @@ namespace StoreTest
       Assert.Equal(loc.Inventory, testItems);
     }
 
-
-
-
   }
 }

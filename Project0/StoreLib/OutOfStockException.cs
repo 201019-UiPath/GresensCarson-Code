@@ -9,5 +9,11 @@ namespace StoreLib
       errorMessage = message;
     }
 
+    public OutOfStockException()
+    {
+      errorMessage = "Sorry! We're out of stock - please try again some other time!";
+    }
+
+
   }
 }
