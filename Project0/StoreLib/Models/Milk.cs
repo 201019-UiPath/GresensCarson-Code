@@ -2,6 +2,8 @@ namespace StoreLib.Models
 {
   public class Milk : Product
   {
+    private static int maxStock = 50;
+    public static int MaxStock { get { return maxStock; } }
     public Milk()
     {
       Stock = 50;

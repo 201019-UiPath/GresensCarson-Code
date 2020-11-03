@@ -2,10 +2,11 @@ namespace StoreLib.Models
 {
   public class IceCream : Product
   {
+    private static int maxStock = 150;
+    public static int MaxStock { get { return maxStock; } }
     public IceCream()
     {
-      this.maxStock = 150;
-      Stock = 50;
+      Stock = 150;
       Name = "Carton of Ice Cream";
       Id = 3;
       Price = 11.99;

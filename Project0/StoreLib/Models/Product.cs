@@ -6,12 +6,13 @@ namespace StoreLib.Models
     private int id;
     private string name;
     private int stock;
-    protected int maxStock = 50;
+    private static int maxStock;
+    public int MaxStock { get { return maxStock; } }
+    protected void SetMaxStock(int i) { maxStock = i; }
 
     public double Price { get; set; }
     public int Id { get; set; }
     public string Name { get; set; }
     public int Stock { get; set; }
-    public int MaxStock() { return maxStock; }
   }
 }

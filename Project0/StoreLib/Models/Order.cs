@@ -39,8 +39,15 @@ namespace StoreLib.Models
 
     public void CancelOrder()
     {
+
+      foreach (Product p in items)
+      {
+        p.Stock = p.Stock + 1;
+      }
+
       List<Product> emptyProductList = new List<Product>();
       items = emptyProductList;
+
       Id = -1;
       price = 0.0;
     }

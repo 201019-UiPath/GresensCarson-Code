@@ -13,8 +13,6 @@ namespace StoreTest
     Product testIceCream = new IceCream();
 
 
-
-
     [Fact]
     public void TestFindOrderPrice()
     {
@@ -30,6 +28,28 @@ namespace StoreTest
       double orderPrice = ot.OrderPrice(testOrder);
 
       Assert.Equal(expectedPrice, orderPrice);
+
+    }
+
+
+    [Fact]
+    public void TestUpdateOrderPrice()
+    {
+      List<Product> emptyItems = new List<Product>();
+      Order emptyOrder = new Order(emptyItems);
+      OrderTasks ot = new OrderTasks();
+
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testMilk);
+      ot.AddProduct(emptyOrder, testIceCream);
+
+      double priceBeforeUpdate = ot.OrderPrice(emptyOrder);
+      ot.AddProduct(emptyOrder, testIceCream);
+      emptyOrder.UpdatePrice();
+      double priceAfterUpdate = (ot.OrderPrice(emptyOrder));
+      double expectedPrice = priceBeforeUpdate + testIceCream.Price;
+
+      Assert.Equal(expectedPrice, priceAfterUpdate);
 
     }
 
@@ -99,9 +119,94 @@ namespace StoreTest
       Assert.Equal(nullOrder.Price, testOrder.Price);
     }
 
+    [Fact]
+    public void TestStockReduction()
+    {
+
+      OrderTasks ot = new OrderTasks();
+      List<Product> emptyItems = new List<Product>();
+      Order emptyOrder = new Order(emptyItems);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testCheese);
+
+      int cheeseStock = testCheese.Stock;
+      int maxCheese = Cheese.MaxStock;
+      int expectedStock = maxCheese - 3;
+
+      Assert.Equal(expectedStock, cheeseStock);
+    }
 
 
+    [Fact]
+    public void TestStockReplenishAfterOrderCanceled()
+    {
+      OrderTasks ot = new OrderTasks();
+      List<Product> emptyItems = new List<Product>();
+      Order emptyOrder = new Order(emptyItems);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.CancelOrder(emptyOrder);
 
+      int cheeseStock = testCheese.Stock;
+      int maxCheese = Cheese.MaxStock;
+
+      Assert.Equal(maxCheese, cheeseStock);
+    }
+
+    [Fact]
+    public void TestRestock()
+    {
+      OrderTasks ot = new OrderTasks();
+      List<Product> emptyItems = new List<Product>();
+      Order emptyOrder = new Order(emptyItems);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testCheese);
+
+      int postOrder = testCheese.Stock;
+      EmployeeTasks et = new EmployeeTasks();
+      et.RestockProductGlobal(testCheese);
+      int postRestock = testCheese.Stock;
+
+      Assert.Equal(postOrder + 3, postRestock);
+    }
+
+    [Fact]
+    public void TestCheckStock()
+    {
+      OrderTasks ot = new OrderTasks();
+      List<Product> emptyItems = new List<Product>();
+      Order emptyOrder = new Order(emptyItems);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testCheese);
+      ot.AddProduct(emptyOrder, testCheese);
+
+      CustomerTasks ct = new CustomerTasks();
+      int postCheck = ct.CheckStock(testCheese);
+      int realStock = testCheese.Stock;
+
+      Assert.Equal(realStock, postCheck);
+    }
+
+
+    [Fact]
+    public void TestAddToLocationInventory()
+    {
+
+      List<Product> testItems = new List<Product>();
+      testItems.Add(testCheese);
+      testItems.Add(testMilk);
+      testItems.Add(testIceCream);
+
+      Location loc = new Location();
+      loc.AddToInventory(testCheese);
+      loc.AddToInventory(testMilk);
+      loc.AddToInventory(testIceCream);
+
+      Assert.Equal(loc.Inventory, testItems);
+    }
 
 
 
